@@ -50,3 +50,9 @@ runtime.block_on(async {
     assert_eq!(format!("{}", container_id), result.unwrap());
 });
 ``` 
+
+## Solution
+
+https://discordapp.com/channels/500028886025895936/500336333500448798/772833759309201418
+https://github.com/tveronezi/help_sample_runtime_block_on/pull/1
+
