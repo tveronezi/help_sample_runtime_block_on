@@ -29,3 +29,24 @@ test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out
 error: test failed, to rerun pass '--lib'
 tveronezi:help_sample_runtime_block_on$ 
 ```
+
+This is the code that panics:
+
+```
+Runtime::new().unwrap().block_on(async {
+    let result = super::docker::get_containers().await;
+    assert_eq!(format!("{}", container_id), result.unwrap());
+});
+```
+
+Using the following didn't do the trick either:
+
+```
+let mut builder = Builder::new_multi_thread();
+builder.enable_all().thread_name("my-test");
+let runtime = builder.build().expect("Unable to build tokio runtime");
+runtime.block_on(async {
+    let result = super::docker::get_containers().await;
+    assert_eq!(format!("{}", container_id), result.unwrap());
+});
+``` 
